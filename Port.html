@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supreet Purthpli - Full Stack Software Engineer</title>
+    <meta name="description" content="Full Stack Software Engineer with 4+ years of experience building enterprise-grade mobile and web applications using Swift, React, NodeJS, and AWS Cloud Services.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --netflix-red: #E50914;
+            --netflix-black: #141414;
+            --netflix-grey: #221F1F;
+            --netflix-medium: #564D4D;
+            --netflix-light: #F5F5F1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--netflix-black);
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: linear-gradient(to bottom, var(--netflix-black), transparent);
+            padding: 1rem 0;
+        }
+
+        .navbar.scrolled {
+            background: var(--netflix-black);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--netflix-red);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--netflix-red);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(rgba(20,20,20,0.4), rgba(20,20,20,0.8)), 
+                        url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero .name {
+            color: var(--netflix-red);
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--netflix-red);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #b8070f;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--netflix-black);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .highlight {
+            color: var(--netflix-red);
+        }
+
+        /* Experience Section */
+        .experience {
+            background: var(--netflix-black);
+        }
+
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding-bottom: 1rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .experience-card {
+            flex: none;
+            width: 320px;
+            background: var(--netflix-grey);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+        }
+
+        .experience-card:hover {
+            transform: scale(1.05) translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(229, 9, 20, 0.25);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--netflix-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-company {
+            color: var(--netflix-light);
+        }
+
+        .card-period {
+            font-size: 0.875rem;
+            color: var(--netflix-medium);
+        }
+
+        .card-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--netflix-red);
+            border-radius: 50%;
+        }
+
+        .card-highlights {
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-highlights p {
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: var(--netflix-red);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: var(--netflix-grey);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--netflix-black);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+        }
+
+        .skill-category:hover {
+            transform: scale(1.05) translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(229, 9, 20, 0.25);
+        }
+
+        .skill-category h3 {
+            color: var(--netflix-red);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--netflix-red);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--netflix-black);
+        }
+
+        .project-card {
+            flex: none;
+            width: 400px;
+            background: var(--netflix-grey);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+        }
+
+        .project-card:hover {
+            transform: scale(1.05) translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(229, 9, 20, 0.25);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            color: var(--netflix-red);
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--netflix-light);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-highlights {
+            font-size: 0.75rem;
+            color: var(--netflix-medium);
+        }
+
+        .project-highlights p {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--netflix-grey);
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--netflix-black);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+        }
+
+        .contact-card:hover {
+            transform: scale(1.05) translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(229, 9, 20, 0.25);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--netflix-red);
+            margin-bottom: 1rem;
+        }
+
+        .contact-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            color: var(--netflix-light);
+            font-size: 0.875rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--netflix-black);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--netflix-medium);
+        }
+
+        .footer p {
+            color: var(--netflix-medium);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .carousel {
+                padding-left: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">SP</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="hero">
+        <div class="hero-content">
+            <h1><span class="name">Supreet</span> Purthpli</h1>
+            <p class="subtitle">Full Stack Software Engineer</p>
+            <p class="description">
+                4+ years of experience building enterprise-grade mobile and web applications using Swift, React, NodeJS, and AWS Cloud Services. Specialized in MVVM-C architecture and cloud-native design patterns for financial services platforms.
+            </p>
+            <div class="hero-buttons">
+                <a href="#experience" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience">
+        <div class="container">
+            <h2 class="section-title">Professional <span class="highlight">Experience</span></h2>
+            <div class="carousel">
+                <div class="experience-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Software Engineer - 2</div>
+                            <div class="card-company">Epsilon</div>
+                            <div class="card-period">Dec 2021 – Dec 2022</div>
+                        </div>
+                        <div class="card-dot"></div>
+                    </div>
+                    <div class="card-highlights">
+                        <p>• Built Spring Boot microservices for GNC supporting 2M+ users</p>
+                        <p>• Led iOS migration to Swift with MVVM-C, improving load time by 47%</p>
+                        <p>• Reduced mobile-cloud sync latency by 38% using AWS Lambda</p>
+                        <p>• Cut production bugs by 62% with CI/CD workflows</p>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Swift</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">MVVM-C</span>
+                        <span class="tech-tag">Combine</span>
+                    </div>
+                </div>
+
+                <div class="experience-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Software Engineer - 1</div>
+                            <div class="card-company">Epsilon</div>
+                            <div class="card-period">Dec 2019 – Nov 2021</div>
+                        </div>
+                        <div class="card-dot"></div>
+                    </div>
+                    <div class="card-highlights">
+                        <p>• Automated deployment pipelines using Jenkins and Docker</p>
+                        <p>• Built Splunk dashboards reducing MTTR by 48%</p>
+                        <p>• Refactored Objective-C to Swift, reducing memory footprint by 18%</p>
+                        <p>• Integrated Kafka for event processing during peak traffic</p>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Jenkins</span>
+                        <span class="tech-tag">Splunk</span>
+                        <span class="tech-tag">Kafka</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Swift</span>
+                    </div>
+                </div>
+
+                <div class="experience-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Master's in Computer Science</div>
+                            <div class="card-company">University of Kansas</div>
+                            <div class="card-period">GPA: 3.78/4.0</div>
+                        </div>
+                        <div class="card-dot"></div>
+                    </div>
+                    <div class="card-highlights">
+                        <p>• Data Science & Data Mining</p>
+                        <p>• Computer Vision & Machine Learning</p>
+                        <p>• Cloud Computing & AI</p>
+                        <p>• Data Privacy & Security</p>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">AWS Certified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <h2 class="section-title">Technical <span class="highlight">Skills</span></h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Swift</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">C#</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Combine</span>
+                        <span class="skill-tag">.NET Core</span>
+                        <span class="skill-tag">jQuery</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Cloud & DevOps</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Lambda</span>
+                        <span class="skill-tag">EC2</span>
+                        <span class="skill-tag">S3</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Testing & QA</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">XCTest</span>
+                        <span class="skill-tag">JUnit</span>
+                        <span class="skill-tag">Selenium</span>
+                        <span class="skill-tag">Postman</span>
+                        <span class="skill-tag">TDD</span>
+                        <span class="skill-tag">XCUITest</span>
+                        <span class="skill-tag">Jest</span>
+                        <span class="skill-tag">Cucumber</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+            <div class="carousel">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" alt="Portfolio Intelligence Platform" class="project-image">
+                    <div class="project-content">
+                        <div class="project-title">Portfolio Intelligence Platform</div>
+                        <p class="project-description">
+                            Microservices platform for high-net-worth individuals with real-time portfolio data processing using Kafka and Bloomberg feeds.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Kafka</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Oracle</span>
+                        </div>
+                        <div class="project-highlights">
+                            <p>• Real-time market data processing</p>
+                            <p>• Sub-150ms response latency</p>
+                            <p>• High uptime service architecture</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" alt="Risk Scoring Engine" class="project-image">
+                    <div class="project-content">
+                        <div class="project-title">Risk Scoring Engine</div>
+                        <p class="project-description">
+                            ML-powered risk assessment system using FastAPI and AWS SageMaker for investment portfolio analysis.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">SageMaker</span>
+                            <span class="tech-tag">Oracle</span>
+                            <span class="tech-tag">Jenkins</span>
+                        </div>
+                        <div class="project-highlights">
+                            <p>• Predictive risk modeling</p>
+                            <p>• Time-series data analysis</p>
+                            <p>• Automated asset movement alerts</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" alt="Enterprise iOS Applications" class="project-image">
+                    <div class="project-content">
+                        <div class="project-title">Enterprise iOS Applications</div>
+                        <p class="project-description">
+                            MVVM-C architected iOS applications with Combine framework for major retail and health brands.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Swift</span>
+                            <span class="tech-tag">Combine</span>
+                            <span class="tech-tag">MVVM-C</span>
+                            <span class="tech-tag">XCTest</span>
+                            <span class="tech-tag">Instruments</span>
+                        </div>
+                        <div class="project-highlights">
+                            <p>• 47% faster onboarding screens</p>
+                            <p>• <0.1% crash rate achievement</p>
+                            <p>• 18% memory footprint reduction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Let's <span class="highlight">Connect</span></h2>
+            <p style="font-size: 1.1rem; margin-bottom: 3rem; opacity: 0.9;">
+                Ready to bring your next project to life? Let's discuss how my expertise can help drive your success.
+            </p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-title">Email</div>
+                    <div class="contact-value">psupreet07@gmail.com</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-title">Phone</div>
+                    <div class="contact-value">+1 (785) 424-2399</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-title">LinkedIn</div>
+                    <div class="contact-value">www.linkedin.com/in/supreetpurthpli</div>
+                </div>
+            </div>
+            
+            <div class="contact-buttons">
+                <a href="mailto:psupreet07@gmail.com" class="btn btn-primary">Send Email</a>
+                <a href="tel:+17854242399" class="btn btn-secondary">Call Now</a>
+                <a href="https://www.linkedin.com/in/supreetpurthpli" class="btn btn-secondary">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 Supreet Purthpli. Designed with inspiration from Netflix.</p>
+            <p>Full Stack Software Engineer • AWS Certified Solutions Architect</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
