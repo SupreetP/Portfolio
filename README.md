@@ -21,9 +21,8 @@ The design is intentionally cinematic and bold, drawing inspiration from Netflix
 
 Check out the deployed portfolio site here:
 
-> [🔗 Your Live GitHub Pages Link](https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/)
+> [🔗  https://supreetp.github.io/Portfolio/
 
-*(Replace with your actual link after deployment!)*
 
 ---
 
